@@ -1,18 +1,37 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { useHistory } from 'react-router-dom';
+import { axiosWithAuth } from "./axiosWithAuth";
 
 import Bubbles from "./Bubbles";
 import ColorList from "./ColorList";
 
-const BubblePage = () => {
+const BubblePage = (props) => {
   const [colorList, setColorList] = useState([]);
-  // fetch your colors data from the server when the component mounts
-  // set that data to the colorList state property
+  const [refresh, setRefresh] = useState(false);
+  const history = useHistory();
+
+  const logout = () => {
+    sessionStorage.removeItem('token');
+    history.push('/');
+  }
+
+  const reorderColors = () => {
+    setRefresh(!refresh);
+  }
+
+  useEffect(() => {
+    axiosWithAuth()
+      .get('http://localhost:5000/api/colors')
+      .then(response => {
+        setColorList(response.data);
+      })
+      .catch(error => console.log(error))
+  }, [])
 
   return (
     <>
-      <ColorList colors={colorList} updateColors={setColorList} />
-      <Bubbles colors={colorList} />
+      <ColorList colors={colorList} updateColors={setColorList} reorderColors={reorderColors} logout={logout} />
+      <Bubbles colors={colorList} refresh={refresh} />
     </>
   );
 };
