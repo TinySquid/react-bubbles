@@ -6,7 +6,7 @@ const initialColor = {
   code: { hex: "" }
 };
 
-const ColorList = ({ colors, updateColors, reorderColors }) => {
+const ColorList = ({ colors, updateColors, reorderColors, logout }) => {
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
   const [newColor, setNewColor] = useState({
@@ -139,11 +139,11 @@ const ColorList = ({ colors, updateColors, reorderColors }) => {
         <legend>Add color</legend>
         <label>
           color name:
-        <input type="text" name="color" value={newColor.color} onChange={handleAddColor} placeholder="Color Name" />
+        <input type="text" name="color" value={newColor.color} onChange={handleAddColor} placeholder="Color Name" required />
         </label>
         <label>
           hex code:
-        <input type="text" name="code" value={newColor.code.hex} onChange={handleAddColor} placeholder="Color Value" />
+        <input type="text" name="code" value={newColor.code.hex} onChange={handleAddColor} placeholder="Color Value" required />
         </label>
         <div className="button-row">
           <button type="submit">Add New Color</button>
@@ -151,6 +151,9 @@ const ColorList = ({ colors, updateColors, reorderColors }) => {
       </form>
       <div className="reorder">
         <button onClick={reorderColors}>Reload Bubbles!</button>
+      </div>
+      <div className="logout">
+        <button onClick={logout}>Logout</button>
       </div>
     </div>
   );
