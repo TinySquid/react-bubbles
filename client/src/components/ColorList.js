@@ -20,8 +20,6 @@ const ColorList = ({ colors, updateColors }) => {
     axiosWithAuth()
       .put(`http://localhost:5000/api/colors/${colorToEdit.id}`, colorToEdit)
       .then(response => {
-        console.log(response)
-        console.log(colors)
         updateColors(colors.map(color => {
           if (color.id === response.data.id) {
             return response.data
@@ -34,8 +32,6 @@ const ColorList = ({ colors, updateColors }) => {
   };
 
   const deleteColor = color => {
-    // make a delete request to delete this color
-    console.log('color delete', color)
     axiosWithAuth()
       .delete(`http://localhost:5000/api/colors/${color.id}`)
       .then(response => {
