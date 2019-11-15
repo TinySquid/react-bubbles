@@ -28,7 +28,10 @@ const ColorList = ({ colors, updateColors }) => {
           }
         }));
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log(error))
+      .finally(() => {
+        setEditing(false);
+      })
   };
 
   const deleteColor = color => {
