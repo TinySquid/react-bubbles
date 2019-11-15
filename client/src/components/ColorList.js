@@ -97,10 +97,23 @@ const ColorList = ({ colors, updateColors, reorderColors }) => {
         </form>
       )}
       <div className="spacer" />
+      <form className="add-bubbles">
+        <legend>Add color</legend>
+        <label>
+          color name:
+        <input type="text" name="color" placeholder="Color Name" />
+        </label>
+        <label>
+          hex code:
+        <input type="text" name="code" placeholder="Color Value (######)" />
+        </label>
+        <div className="button-row">
+          <button type="submit">Add New Color</button>
+        </div>
+      </form>
       <div className="reorder">
         <button onClick={reorderColors}>Reload Bubbles!</button>
       </div>
-      {/* stretch - build another form here to add a color */}
     </div>
   );
 };
