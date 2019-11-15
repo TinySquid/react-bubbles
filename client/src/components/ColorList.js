@@ -6,7 +6,7 @@ const initialColor = {
   code: { hex: "" }
 };
 
-const ColorList = ({ colors, updateColors }) => {
+const ColorList = ({ colors, updateColors, reorderColors }) => {
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
@@ -97,6 +97,9 @@ const ColorList = ({ colors, updateColors }) => {
         </form>
       )}
       <div className="spacer" />
+      <div className="reorder">
+        <button onClick={reorderColors}>Reload Bubbles!</button>
+      </div>
       {/* stretch - build another form here to add a color */}
     </div>
   );

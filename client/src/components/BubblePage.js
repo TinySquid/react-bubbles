@@ -6,6 +6,11 @@ import ColorList from "./ColorList";
 
 const BubblePage = () => {
   const [colorList, setColorList] = useState([]);
+  const [refresh, setRefresh] = useState(false);
+
+  const reorderColors = () => {
+    setRefresh(!refresh);
+  }
 
   useEffect(() => {
     axiosWithAuth()
@@ -18,8 +23,8 @@ const BubblePage = () => {
 
   return (
     <>
-      <ColorList colors={colorList} updateColors={setColorList} />
-      <Bubbles colors={colorList} />
+      <ColorList colors={colorList} updateColors={setColorList} reorderColors={reorderColors} />
+      <Bubbles colors={colorList} refresh={refresh} />
     </>
   );
 };
