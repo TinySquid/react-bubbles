@@ -9,6 +9,44 @@ const initialColor = {
 const ColorList = ({ colors, updateColors, reorderColors }) => {
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
+  const [newColor, setNewColor] = useState({
+    color: '',
+    code: {
+      hex: ''
+    }
+  });
+
+  const addColor = e => {
+    e.preventDefault();
+    axiosWithAuth()
+      .post('http://localhost:5000/api/colors', newColor)
+      .then(response => {
+        updateColors(response.data);
+      })
+      .catch(error => console.log(error))
+      .finally(() => {
+        setNewColor({
+          color: '',
+          code: {
+            hex: ''
+          }
+        });
+      })
+  }
+
+  const handleAddColor = e => {
+    if (e.target.name === "code") {
+      setNewColor({
+        ...newColor,
+        [e.target.name]: { hex: e.target.value }
+      });
+    } else {
+      setNewColor({
+        ...newColor,
+        [e.target.name]: e.target.value
+      });
+    }
+  }
 
   const editColor = color => {
     setEditing(true);
@@ -97,15 +135,15 @@ const ColorList = ({ colors, updateColors, reorderColors }) => {
         </form>
       )}
       <div className="spacer" />
-      <form className="add-bubbles">
+      <form className="add-bubbles" onSubmit={addColor}>
         <legend>Add color</legend>
         <label>
           color name:
-        <input type="text" name="color" placeholder="Color Name" />
+        <input type="text" name="color" value={newColor.color} onChange={handleAddColor} placeholder="Color Name" />
         </label>
         <label>
           hex code:
-        <input type="text" name="code" placeholder="Color Value (######)" />
+        <input type="text" name="code" value={newColor.code.hex} onChange={handleAddColor} placeholder="Color Value" />
         </label>
         <div className="button-row">
           <button type="submit">Add New Color</button>
