@@ -117,36 +117,46 @@ form {
   }
 }
 
+.add-bubbles {
+  margin: 2rem 0;
+}
 
 .login {
-  max-height: 250px;
-  margin: 0 auto;
   display: flex;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
   justify-content: center;
-  width: 25%;
-  border: 1px solid black;
-  padding: 1%;
-  
+  margin: 2rem auto;
+  height: 250px;
+  width: 500px;
+  padding: 1rem;
+  box-shadow: 0 0 5px 1px rgba(60, 60, 60, 0.5);
+
   h1 {
     width: 100%;
   }
-  
+
   label {
-    box-sizing: border-box;
+    text-align: left;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &:last-child{
+      margin-top: 1rem;
+    }
   }
-  
+
   input {
-    width: 60%;
+    width: 70%;
   }
 
   button {
+    margin-top: 1rem;
     height: 2rem;
-    width: 100%;
+    width: 60%;
+    border: none;
+    background-color: black;
+    color: white;
   }
-}
-
-.add-bubbles {
-  margin: 2rem 0;
 }
